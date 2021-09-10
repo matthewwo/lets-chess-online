@@ -1,10 +1,11 @@
-const express = require('express');
+import express from 'express';
+import http from 'http';
+import { Server } from 'socket.io';
+import { Client } from 'pg';
+
 const app = express();
-const http = require('http');
 const server = http.createServer(app);
-const { Server } = require("socket.io");
 const io = new Server(server);
-const { Client } = require('pg');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
