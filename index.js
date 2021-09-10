@@ -45,6 +45,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(80, () => {
-  console.log('listening on *:80');
+app.set('port', (process.env.PORT || 3000));
+server.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
