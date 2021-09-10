@@ -1,8 +1,10 @@
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
-import * as pg from 'pg'
-const { Client } = pg
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+
+const { Client } = require('pg');
 
 const app = express();
 const server = http.createServer(app);
