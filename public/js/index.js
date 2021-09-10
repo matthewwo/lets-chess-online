@@ -24,10 +24,16 @@ function onRevertPressed() {
   }
 }
 
+function onDrop (source, target, piece, newPos, oldPos, orientation) {
+  socket.emit('new board position', Xiangqiboard.objToFen(newPos));
+}
+
+
 const config = {
   draggable: true,
   position: 'start',
-  onMoveEnd: onChange
+  // onChange: onChange,
+  onDrop: onDrop
 };
 const board = Xiangqiboard('myBoard', config);
 

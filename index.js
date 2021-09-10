@@ -28,13 +28,11 @@ io.on('connection', (socket) => {
   });
 
   socket.on('revert step', () => {
-    console.log(history)
     if (history.length > 1) {
-      history.pop();
+      history.shift();
     }
 
     const position = history[0];
-    console.log(position);
     socket.emit('refresh position', position);
   });
 
@@ -45,7 +43,6 @@ io.on('connection', (socket) => {
   });
 });
 
-app.set('port', (process.env.PORT || 3000));
-server.listen(app.get('port'), function() {
-  console.log('Node app is running on port', app.get('port'));
+server.listen((process.env.PORT || 3000), () => {
+  console.log('server is ready');
 });
