@@ -52,6 +52,7 @@ io.on('connection', (socket) => {
     }
 
     const position = history[0];
+    saveHistory();
     socket.emit('refresh position', position);
   });
 
