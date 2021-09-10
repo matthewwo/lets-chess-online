@@ -23,8 +23,14 @@ app.get('/', (req, res) => {
 
 const historySize = 20;
 let history = ['start'];
+const saveHistory = () => {
+  client.query(`UPDATE storage SET value = $1 WHERE key = 'history'`, [JSON.stringify(history)])
+};
+
 function push(array, item, length) {
   array.unshift(item) > length ?  array.pop() : null
+
+  saveHistory();
 }
 
 io.on('connection', (socket) => {
@@ -53,7 +59,7 @@ io.on('connection', (socket) => {
   });
 });
 
-client.query('SELECT value FROM storage WHERE key = "history"', (err, res) => {
+client.query(`SELECT value FROM storage WHERE key = 'history'`, (err, res) => {
   let storedHistory = ['start'];
   if (err) throw err;
   for (let row of res.rows) {
