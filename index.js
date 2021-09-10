@@ -1,7 +1,8 @@
 import express from 'express';
 import http from 'http';
 import { Server } from 'socket.io';
-import { Client } from 'pg';
+import * as pg from 'pg'
+const { Client } = pg
 
 const app = express();
 const server = http.createServer(app);
