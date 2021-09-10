@@ -54,6 +54,7 @@ io.on('connection', (socket) => {
     const position = history[0];
     saveHistory();
     socket.emit('refresh position', position);
+    socket.broadcast.emit('refresh position', position);
   });
 
   socket.on('restart game', () => {
