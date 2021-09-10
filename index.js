@@ -13,7 +13,7 @@ const client = new Client({
   }
 });
 
-client.connect();
+await client.connect();
 
 app.use(express.static('public'))
 
