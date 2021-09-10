@@ -3,7 +3,6 @@ import http from 'http';
 import { Server } from 'socket.io';
 import { createRequire } from "module";
 const require = createRequire(import.meta.url);
-
 const { Client } = require('pg');
 
 const app = express();
