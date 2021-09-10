@@ -4,6 +4,16 @@ const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(server);
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+
+client.connect();
 
 app.use(express.static('public'))
 
@@ -12,7 +22,7 @@ app.get('/', (req, res) => {
 });
 
 const historySize = 20;
-const history = ['start'];
+let history = ['start'];
 function push(array, item, length) {
   array.unshift(item) > length ?  array.pop() : null
 }
@@ -43,6 +53,17 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen((process.env.PORT || 3000), () => {
-  console.log('server is ready');
+client.query('SELECT value FROM storage WHERE key = "history"', (err, res) => {
+  let storedHistory = ['start'];
+  if (err) throw err;
+  for (let row of res.rows) {
+    storedHistory = row.value;
+  }
+  client.end();
+
+  history = storedHistory;
+
+  server.listen((process.env.PORT || 3000), () => {
+    console.log('server is ready');
+  });
 });
