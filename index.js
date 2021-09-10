@@ -65,7 +65,6 @@ client.query(`SELECT value FROM storage WHERE key = 'history'`, (err, res) => {
   for (let row of res.rows) {
     storedHistory = row.value;
   }
-  client.end();
 
   history = storedHistory;
 
