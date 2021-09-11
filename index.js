@@ -88,7 +88,11 @@ client.query(`SELECT value FROM storage WHERE key = 'history'`, (err, res) => {
     currentTurn = row.value.turn;
   }
 
-  history = Array.from(storedHistory);
+  if (storedHistory && storedHistory.length > 1) {
+    history = Array.from(storedHistory);
+  } else {
+    saveHistory();
+  }
 
   server.listen((process.env.PORT || 3000), () => {
     console.log('server is ready');
