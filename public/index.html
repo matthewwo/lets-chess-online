@@ -12,13 +12,15 @@
 <body>
 <div style="display: flex; justify-content: space-between; margin-bottom: 20px">
     <button onclick="onRestartPressed()" style="font-size: 20px;">重新棋局</button>
+    <span id="turn-indicator" style="font-size: 20px"></span>
+    <span id="people-count-indicator" style="font-size: 20px"></span>
     <button onclick="onRevertPressed()" style="font-size: 20px;">悔棋</button>
 </div>
 <div id="myBoard"></div>
 
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
-
+<script src="js/lodash.min.js"></script>
 <script src="js/socket.io.min.js"></script>
 <script src="js/index.js"></script>
 </body>
