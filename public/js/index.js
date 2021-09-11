@@ -21,7 +21,7 @@ function onRevertPressed() {
 
 function onDrop (source, target, piece, newPos, oldPos) {
   if (!_.isEqual(newPos, oldPos)) {
-    socket.emit('new board position', Xiangqiboard.objToFen(newPos));
+    socket.emit('make move', source, target, Xiangqiboard.objToFen(newPos));
   }
 }
 
@@ -39,7 +39,7 @@ const config = {
 };
 const board = Xiangqiboard('myBoard', config);
 
-socket.on('refresh state', ({ position, turn }) => {
+socket.on('refresh state', ({ position, turn, lastMove }) => {
   if (position) {
     board.position(position)
   }
@@ -48,6 +48,11 @@ socket.on('refresh state', ({ position, turn }) => {
   const indicator = document.getElementById('turn-indicator');
   indicator.innerText = currentTurn === 'red' ? '紅棋回合' : '黑棋回合';
   indicator.style.color = currentTurn;
+
+  $('.highlighted').removeClass('highlighted');
+  for (const square of lastMove) {
+    $('.square-' + square).addClass('highlighted');
+  }
 });
 
 socket.on('number of users connected', (people) => {
