@@ -11,13 +11,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 </head>
 <body>
-<div style="display: flex; justify-content: space-between; margin-bottom: 20px">
+<div style="display: flex; justify-content: space-between; max-width: 600px; margin: 20px auto;">
     <button onclick="onRestartPressed()" style="font-size: 20px;">重新棋局</button>
     <span id="turn-indicator" style="font-size: 20px"></span>
     <span id="people-count-indicator" style="font-size: 20px"></span>
     <button onclick="onRevertPressed()" style="font-size: 20px;">悔棋</button>
 </div>
-<div id="myBoard"></div>
+
+<div id="myBoard" style="max-width: 80vh; margin-left: auto; margin-right: auto"></div>
 
 <script src="js/jquery.min.js"></script>
 <script src="js/xiangqiboard.min.js"></script>
