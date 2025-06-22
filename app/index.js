@@ -29,7 +29,7 @@ let history = ['start'];
 let currentTurn = 'red';
 let lastMove = [];
 const saveHistory = () => {
-  client.query(`UPDATE storage SET value = $1 WHERE key = 'history'`, [{ 'position': history, 'turn': currentTurn, 'lastMove': lastMove }])
+  client.query(`INSERT INTO storage (key, value) VALUES ('history', $1) ON CONFLICT (key) DO UPDATE SET value = $1`, [{ 'position': history, 'turn': currentTurn, 'lastMove': lastMove }])
 };
 
 function push(array, item, length) {
