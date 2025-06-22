@@ -24,6 +24,11 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html');
 });
 
+app.get('/health', async (req, res) => {
+  await client.query('SELECT 1');
+  res.status(200).send('OK');
+});
+
 const historySize = 20;
 let history = ['start'];
 let currentTurn = 'red';
