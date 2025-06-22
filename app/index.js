@@ -72,6 +72,7 @@ io.on('connection', (socket) => {
   socket.on('restart game', () => {
     history.splice(0, history.length);
     socket.emit('refresh state', { position: 'start', turn: 'red' });
+    socket.broadcast.emit('refresh state', { position: 'start', turn: 'red' });
     push(history, 'start', historySize);
   });
 

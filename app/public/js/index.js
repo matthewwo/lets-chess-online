@@ -39,7 +39,7 @@ const config = {
 };
 const board = Xiangqiboard('myBoard', config);
 
-socket.on('refresh state', ({ position, turn, lastMove }) => {
+socket.on('refresh state', ({ position, turn, lastMove = [] }) => {
   if (position) {
     board.position(position)
   }
