@@ -10,7 +10,7 @@ const server = http.createServer(app);
 const io = new Server(server);
 
 const client = new Client({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.NETLIFY_DATABASE_URL || process.env.DATABASE_URL,
   ssl: process.env.NODE_ENV ? {
     rejectUnauthorized: false
   } : false
