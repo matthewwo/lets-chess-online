@@ -5,9 +5,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node index.js",
+    "start": "knex knex migrate:latest && node index.js",
     "start:dev": "nodemon index.js",
-    "migrate:latest": "knex migrate:latest --env development",
+    "migrate:latest": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
     "migrate:make": "knex migrate:make"
   },
