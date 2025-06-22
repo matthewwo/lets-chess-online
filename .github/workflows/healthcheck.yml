@@ -1,0 +1,11 @@
+name: Health check
+on:
+  schedule:
+    - cron: '*/2 * * * *'
+
+jobs:
+  healthcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call health check endpoint
+        run: curl -L --max-time 60 --retry 3 https://lets-chess-online.onrender.com/health
